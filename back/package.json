@@ -8,6 +8,7 @@
     "dev": "node --import ./scripts/register.js --watch src/index.ts",
     "generate": "graphql-codegen",
     "prisma": "prisma",
+    "fullbdd" : "node src/seed.js",
     "postinstall": "prisma generate"
   },
   "keywords": [],

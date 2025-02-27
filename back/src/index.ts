@@ -1,9 +1,9 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { typeDefs } from './schema.js';
-import { resolvers } from './resolvers/resolvers.js';
+import { resolvers } from './resolvers';
 import db from './datasources/db.js'
-import { AuthenticatedUser, getUser } from './modules/auth.js';
+import { AuthenticatedUser, getUser } from './auth';
 import { PrismaClient } from '@prisma/client';
 
 interface MyContext {

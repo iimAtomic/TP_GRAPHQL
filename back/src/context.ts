@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { AuthenticatedUser } from "./modules/auth.js";
+import { AuthenticatedUser } from "./auth";
 
 export type DataSourceContext = {
   dataSources: {
