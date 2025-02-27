@@ -1,4 +1,4 @@
-import { QueryResolvers } from "../../types.js";
+import { QueryResolvers } from "../types";
 
 export const getArticle: QueryResolvers["getArticle"] = async(_, { id }, context) => {
     if (!context.user) {
@@ -10,7 +10,7 @@ export const getArticle: QueryResolvers["getArticle"] = async(_, { id }, context
       };
     }
     try {
-      console.log('yoyoyo');
+      console.log('ceci est un test');
       const article = await context.dataSources.db.article.findFirstOrThrow({ where: {id}, include: {author: true, comments: true, likes: { include: {user: true}}} });
       const comments = await context.dataSources.db.comment.findMany({where: {articleId: id}, include: {author: true}})
       if (!article) {

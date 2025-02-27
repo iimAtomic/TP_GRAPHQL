@@ -1,7 +1,7 @@
-import { comparePasswords, createJWT } from "../../modules/auth.js";
-import { MutationResolvers } from "../../types.js";
+import { comparePasswords, createJWT } from "../auth";
+import { MutationResolvers } from "../types";
 
-export const logIn: MutationResolvers["logIn"] =async (_, { username, password }, context) => {
+export const connexion: MutationResolvers["logIn"] =async (_, { username, password }, context) => {
     const user = await context.dataSources.db.user.findUnique({
       where: { username },
     });

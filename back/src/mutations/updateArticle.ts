@@ -1,4 +1,4 @@
-import { MutationResolvers } from "../../types.js";
+import { MutationResolvers } from "../types";
 
 export const updateArticle: MutationResolvers["updateArticle"] = async (_, { id, data }, context) => {
     try {

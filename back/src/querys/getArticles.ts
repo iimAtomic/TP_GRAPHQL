@@ -1,4 +1,4 @@
-import { QueryResolvers } from "../../types.js";
+import { QueryResolvers } from "../types";
 
 type orderBy = {
   updatedAt?: 'desc',
