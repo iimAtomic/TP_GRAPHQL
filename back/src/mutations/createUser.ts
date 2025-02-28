@@ -1,4 +1,4 @@
-import { hashPassword } from "../auth";
+import { hashPassword } from "../auth.js";
 import { MutationResolvers } from "../types";
 
 export const createUser: MutationResolvers["createUser"] = async (_, { username, password }, context) => {

@@ -50,7 +50,7 @@ export const getArticle: QueryResolvers["getArticle"] = async(_, { id }, context
       console.error(e);
       return {
         code: 400,
-        message: "Failed to get article",
+        message: "impossible recuperer l'article",
         success: false,
         article: null,
       };

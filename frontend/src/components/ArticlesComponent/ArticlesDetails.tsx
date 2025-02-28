@@ -3,6 +3,7 @@ import { ArticleDetails as ArticleType } from "../../gql/graphql";
 import {useUserContext} from "../UserContext.tsx";
 import React, { useEffect, useState } from "react";
 import { useQuery, gql, useMutation } from "@apollo/client";
+import "../codeCss/ArticleDetail.css";
 
 
 const GET_ARTICLE = gql`

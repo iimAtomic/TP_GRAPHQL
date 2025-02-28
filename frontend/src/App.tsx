@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router";
-import Login from "./components/Login";
+import Login from "./components/LoginComponent/Login.tsx";
 import Home from "./components/HomePage.tsx";
-import Register from "./components/Register.tsx";
+import Register from "./components/LoginComponent/Register.tsx";
 import CreateArticle from "./components/ArticlesComponent/CreateArticle.tsx";
 
 

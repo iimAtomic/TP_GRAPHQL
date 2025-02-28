@@ -1,4 +1,4 @@
-import { comparePasswords, createJWT } from "../auth";
+import { comparePasswords, createJWT } from "../auth.js";
 import { MutationResolvers } from "../types";
 
 export const connexion: MutationResolvers["logIn"] =async (_, { username, password }, context) => {

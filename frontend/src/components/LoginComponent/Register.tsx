@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router';
-import '../style.css';
+import '../../style.css';
 import { gql, useMutation } from '@apollo/client';
+import "../codeCss/Register.css";
 
 const postCreateUser = gql(`
   mutation SignIn($username: String!, $password: String!) {
@@ -44,7 +45,7 @@ const SignUp: React.FC = () => {
     return (
         <div className="signup-container">
             <div className="signup-form">
-                <img className="logo" src="/logo.png" alt="logo" />
+                <img className="logo" src="../../../public/logo.jpg" alt="logo" />
                 <form onSubmit={handleSignUp}>
                     <input
                         type="text"
