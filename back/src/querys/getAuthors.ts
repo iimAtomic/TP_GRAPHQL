@@ -1,4 +1,4 @@
-import { QueryResolvers } from "../../types.js";
+import { QueryResolvers } from "../types";
 
 export const getAuthors: QueryResolvers["getAuthors"] = async (_, __, context) => {
     if (!context.user) {

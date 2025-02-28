@@ -1,7 +1,8 @@
-import { gql, useMutation } from "@apollo/client";
 import React, { useEffect, useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router";
-import {useUserContext} from "../UserContext.tsx";
+import { useUserContext } from "../UserContext.tsx";
+import "../codeCss/CreateArticle.css";
 
 const ADD_ARTICLE = gql`
     mutation AddArticle($title: String!, $content: String!) {
@@ -33,12 +34,13 @@ const ADD_ARTICLE = gql`
 
 const CreateArticle: React.FC = () => {
     const [title, setTitle] = useState('');
-    const navigate = useNavigate();
     const [content, setContent] = useState('');
+    const navigate = useNavigate();
     const [addArticle, { data }] = useMutation(ADD_ARTICLE, {
         refetchQueries: ["GetArticles"],
     });
     const { user } = useUserContext();
+
     useEffect(() => {
         if (data && data.addArticle && data.addArticle.success) {
             navigate("/");
@@ -59,7 +61,7 @@ const CreateArticle: React.FC = () => {
 
     return (
         <div className="create-post-container">
-            <h2>Creation d'un nouveau article</h2>
+            <h2>Création d'un nouvel article</h2>
             <form onSubmit={handleCreateArticle}>
                 <div>
                     <label>Titre:</label>
@@ -79,8 +81,10 @@ const CreateArticle: React.FC = () => {
                     />
                 </div>
                 <div className="form-actions">
-
-                    <button type="submit" > Post</button>
+                    <button type="button" className="back-button" onClick={() => navigate("/")}>
+                        Retour
+                    </button>
+                    <button type="submit">Poster</button>
                 </div>
             </form>
         </div>

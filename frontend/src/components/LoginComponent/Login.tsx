@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "../style.css";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router";
-import {useUserContext} from "./UserContext.tsx";
+import {useUserContext} from "../UserContext.tsx";
+import "../codeCss/Login.css";
 
 
 const postLogIn = gql(`
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
     return (
         <div className="login-container">
             <div className="login-form">
-                <img className="logo" src="/logo.png" alt="logo" />
+                <img className="logo"   src="../../public/logo.jpg"  alt="logo" />
                 <form onSubmit={handleLogin}>
                     <input
                         type="text"
