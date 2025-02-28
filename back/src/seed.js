@@ -3,11 +3,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function seed() {
-    // Créer des utilisateurs
+
     const user1 = await prisma.user.create({
         data: {
             username: 'johndoe',
-            password: 'securepassword1', // Note: Stockez toujours les mots de passe de manière sécurisée
+            password: 'securepassword1',
         },
     });
 
@@ -20,7 +20,7 @@ async function seed() {
 
     console.log('Utilisateurs créés:', user1, user2);
 
-    // Créer des articles
+
     const article1 = await prisma.article.create({
         data: {
             title: 'Mon premier article',
@@ -43,7 +43,6 @@ async function seed() {
 
     console.log('Articles créés:', article1, article2);
 
-    // Créer des commentaires
     const comment1 = await prisma.comment.create({
         data: {
             content: 'Super article !',
@@ -70,7 +69,7 @@ async function seed() {
 
     console.log('Commentaires créés:', comment1, comment2);
 
-    // Créer des likes
+
     const like1 = await prisma.like.create({
         data: {
             user: {

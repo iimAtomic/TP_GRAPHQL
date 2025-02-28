@@ -1,6 +1,6 @@
-import { QueryResolvers } from "../../types.js";
+import { QueryResolvers } from "../types";
 
-export const me: QueryResolvers["me"] = async (_, __, context) => {
+export const myprofile: QueryResolvers["me"] = async (_, __, context) => {
     if (!context.user) {
       return {
         code: 401,

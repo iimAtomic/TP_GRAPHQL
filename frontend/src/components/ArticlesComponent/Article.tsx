@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ArticleDetail from "./ArticlesDetails"
 import { Article as ArticleType } from "../../gql/graphql";
 import {useUserContext} from "../UserContext.tsx";
+import "../codeCss/Article.css";
 
 
 

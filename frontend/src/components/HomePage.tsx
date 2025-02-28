@@ -1,11 +1,10 @@
-import type React from "react"
-import "../styleArticle.css"
+import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { Article as ArticleType, GetArticlesQuery, GetAuthorsQuery, User } from "../gql/graphql";
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import {useUserContext} from "./UserContext.tsx";
+import { useUserContext } from "./UserContext.tsx";
 import Article from "./ArticlesComponent/Article.tsx";
+import "./codeCss/HomePage.css";
 
 const GET_ARTICLES = gql`
     query GetArticles($authorId: String, $orderByLikesAsc: Boolean, $orderByLikesDesc: Boolean) {
@@ -52,9 +51,9 @@ const GET_AUTHORS = gql`
 const Home: React.FC = () => {
     const { user } = useUserContext();
     const [authorId, setAuthorId] = useState<string | null>(null);
-    const [orderByLikesAsc, setOrderByLikesAsc] = useState<boolean | null>(null);
-    const [orderByLikesDesc, setOrderByLikesDesc] = useState<boolean | null>(null);
-    const { data: articlesData, refetch } = useQuery<GetArticlesQuery>(GET_ARTICLES, {
+    const [orderByLikesAsc] = useState<boolean | null>(null);
+    const [orderByLikesDesc] = useState<boolean | null>(null);
+    const { data: articlesData } = useQuery<GetArticlesQuery>(GET_ARTICLES, {
         variables: { authorId, orderByLikesAsc, orderByLikesDesc },
         skip: !user.token,
         context: {
@@ -73,6 +72,7 @@ const Home: React.FC = () => {
     });
     const [articles, setArticles] = useState<ArticleType[] | null>([]);
     const [authors, setAuthors] = useState<User[] | null>([]);
+
     useEffect(() => {
         if (articlesData && articlesData.getArticles && articlesData.getArticles.articles) {
             setArticles(articlesData.getArticles.articles.filter(article => article !== null));
@@ -86,7 +86,7 @@ const Home: React.FC = () => {
     }, [authorsData]);
 
     return (
-        <>
+        <div className="main-container">
             <div className="menu-container">
                 <select onChange={(e) => setAuthorId(e.target.value)}>
                     <option value="">Tous les auteurs</option>
@@ -95,32 +95,18 @@ const Home: React.FC = () => {
                     ))}
                 </select>
 
-                <button onClick={() => {
-                    setOrderByLikesAsc(true);
-                    setOrderByLikesDesc(false);
-                    refetch();
-                }}>
-                    Trier par Like "Croissant"
-                </button>
-
-                <button onClick={() => {
-                    setOrderByLikesAsc(false);
-                    setOrderByLikesDesc(true);
-                    refetch();
-                }}>
-                    Trier par Like "Decroissant"
-                </button>
-
                 <Link to="/CreatePost">
                     <button className="create-post-button">Créer un Post</button>
                 </Link>
-                <button id="disconnet" onClick={() => {localStorage.removeItem('token'); window.location.reload();}}>
+                <button id="disconnect" onClick={() => { localStorage.removeItem('token'); window.location.reload(); }}>
                     Se déconnecter
                 </button>
             </div>
 
-            <Article articles={articles} />
-        </>
+            <div className="article-container">
+                <Article articles={articles} />
+            </div>
+        </div>
     );
 }
 

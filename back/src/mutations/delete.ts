@@ -1,66 +1,80 @@
-import { MutationResolvers } from "../../types.js";
+import { MutationResolvers } from "../types";
 
-export const deleteArticle: MutationResolvers["deleteArticle"] = async(_, { id }, context) => {
+export const deleteArticle: MutationResolvers["deleteArticle"] = async (_, { id }, context) => {
     if (!context.user) {
         return {
+            success: false,
             code: 401,
             message: "Unauthorized",
-            success: false,
         };
     }
+
     try {
-        const article = await context.dataSources.db.article.findFirstOrThrow({where: {id}, include: { author: true }})
+        const article = await context.dataSources.db.article.findFirstOrThrow({
+            where: { id },
+            include: { author: true },
+        });
+
         if (article.authorId !== context.user.id) {
             return {
+                success: false,
                 code: 403,
                 message: "Forbidden",
-                success: false
-            }
+            };
         }
-        await context.dataSources.db.article.delete({where: {id}})
+
+        await context.dataSources.db.article.delete({ where: { id } });
+
         return {
+            success: true,
             code: 200,
             message: "Article deleted",
-            success: true
-        }
-    } catch (e) {
-        console.error(e);
+        };
+    } catch (error) {
+        console.error(error);
         return {
+            success: false,
             code: 400,
             message: "Failed to delete article",
-            success: false,
         };
     }
 };
 
-export const deleteComment: MutationResolvers["deleteComment"] = async(_, { id }, context) => {
+export const deleteComment: MutationResolvers["deleteComment"] = async (_, { id }, context) => {
     if (!context.user) {
         return {
+            success: false,
             code: 401,
             message: "Unauthorized",
-            success: false,
         };
     }
+
     try {
-        const comment = await context.dataSources.db.comment.findFirstOrThrow({where: {id}, include: { author: true }})
+        const comment = await context.dataSources.db.comment.findFirstOrThrow({
+            where: { id },
+            include: { author: true },
+        });
+
         if (comment.authorId !== context.user.id) {
             return {
+                success: false,
                 code: 403,
                 message: "Forbidden",
-                success: false
-            }
+            };
         }
-        await context.dataSources.db.comment.delete({where: {id}})
+
+        await context.dataSources.db.comment.delete({ where: { id } });
+
         return {
+            success: true,
             code: 200,
             message: "Comment deleted",
-            success: true
-        }
-    } catch (e) {
+        };
+    } catch (error) {
         return {
+            success: false,
             code: 400,
             message: "Failed to delete comment",
-            success: false,
         };
     }
 };
@@ -68,35 +82,38 @@ export const deleteComment: MutationResolvers["deleteComment"] = async(_, { id }
 export const deleteLike: MutationResolvers["deleteLike"] = async (_, __, context) => {
     if (!context.user) {
         return {
+            success: false,
             code: 401,
             message: "Unauthorized",
-            success: false,
         };
     }
+
     try {
         const like = await context.dataSources.db.like.findFirstOrThrow({
-            where: { userId: context.user.id }
+            where: { userId: context.user.id },
         });
 
         if (like.userId !== context.user.id) {
             return {
+                success: false,
                 code: 403,
                 message: "Forbidden",
-                success: false
-            }
+            };
         }
+
         await context.dataSources.db.like.delete({ where: { id: like.id } });
+
         return {
+            success: true,
             code: 200,
             message: "Like deleted",
-            success: true
-        }
-    } catch (e) {
-        console.error(e);
+        };
+    } catch (error) {
+        console.error(error);
         return {
+            success: false,
             code: 400,
             message: "Failed to delete like",
-            success: false,
         };
     }
-}
+};
